@@ -1,0 +1,30 @@
+
+set terminal pdfcairo enhanced #dashed font 'Arial,8' fontscale 1.0 size 4,3.5
+set border 3
+set autoscale
+#set xtics 1 nomirror
+set xtics (2, 4, 8, 12, 16, 20, 40) nomirror
+#set ytics 0,2 nomirror
+set ytics (2, 4, 8, 12, 16, 20, 40) nomirror
+set yrange [0:40.5]
+set xrange [0:40]
+set xlabel "Number of CPUs" # offset -1,-1
+set ylabel "Speedup" offset 2, 2
+set key box left top Left reverse spacing 1.2 width 2 #font 'Arial,8' width -10
+#set key box outside center top horizontal Left reverse font 'Arial,8'
+set datafile separator ";"
+#set title "saxpy"
+set macros 
+
+load 'gnuplot.gpi'
+
+set boxwidth 3.0
+set style fill transparent solid 1
+
+set output "../pdf/hotspot_speedup.pdf"
+
+plot \
+	'../scripts/stats_ideal_speedup.csv' using 1:2 with linespoints t columnheader ls 13,\
+	'../scripts/stats_hotspot_speedup_cuda.csv' using 1:2 with boxes t columnheader ls 1, '' using 1:2:4 with yerrorbars notitle ls 14,\
+	'../scripts/stats_hotspot_speedup.csv' using 1:($2-$4):($2+$4) with filledcu lc rgb color_em notitle, '' using 1:2 with linespoints t columnheader ls 2,\
+	

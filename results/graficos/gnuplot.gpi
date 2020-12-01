@@ -1,0 +1,33 @@
+pointsize = 1
+wline = 1
+color_em = '#a3a3a3' #cor da margem de erro
+
+#functions
+replace(str) = str #system("echo ".str." | tr . ,")
+format(col) = (column(col) > 0 ? replace(sprintf("%.4f",column(col))) : "")
+
+unset for [i=1:10] label i
+set grid noxtics ytics
+
+#Style transparent para a margem de erro
+set style fill transparent solid 0.7
+
+#Style para as linhas
+set style line 1  lt 1  ps pointsize lw wline pt 9
+set style line 2  lt 2  lc rgbcolor "dark-green"   ps pointsize lw wline pt 5
+set style line 3  lt 3  ps pointsize lw wline pt 7
+set style line 4  lt 4  lc rgbcolor "orange"       ps pointsize lw wline pt 11
+set style line 5  lt 5  lc rgbcolor "black"        ps pointsize lw wline pt 13 #8
+set style line 6  lt 6  lc rgbcolor "dark-violet"  ps pointsize lw wline pt 3
+set style line 7  lt 7  lc rgbcolor "green" ps pointsize lw wline pt 9
+set style line 8  lt 8  ps pointsize lw wline pt 5
+set style line 9  lt 9  ps pointsize lw wline pt 7
+set style line 10 lt 10 ps pointsize lw wline pt 11
+set style line 11 lt 11 lc rgbcolor "cyan" ps pointsize lw wline pt 13
+set style line 12 lt 12 lc rgbcolor "brown" ps pointsize lw wline pt 3
+
+#Style para a linha Speedup ideal
+set style line 13 lt 13 lc rgbcolor "dark-gray" ps 0 lw wline 
+
+#Style para a margem de erro
+set style line 14 lc rgb 'black' pt 0
